@@ -101,4 +101,12 @@ public class OrderService {
     public List<Order> getAllOrders() {
         return orderDao.getAllOrder();
     }
+
+    public Order getOrder(Integer id) {
+        Order order = orderDao.getOrder(id);
+        if (order == null) {
+            throw new WebApplicationException("Item not found", Response.status(Response.Status.NOT_FOUND).build());
+        }
+        return order;
+    }
 }

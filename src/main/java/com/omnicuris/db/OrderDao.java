@@ -17,13 +17,13 @@ public interface OrderDao {
     @GetGeneratedKeys
     int add(@BindBean("o") Order order);
 
-    @SqlQuery("SELECT * FROM order where id = :id;")
+    @SqlQuery("SELECT * FROM `order` where id = :id;")
     Order getOrder(@Bind("id") int id);
 
-    @SqlQuery("SELECT * FROM order;")
+    @SqlQuery("SELECT * FROM `order`;")
     List<Order> getAllOrder();
 
-    @SqlUpdate("DELETE FROM order WHERE id = :id;")
+    @SqlUpdate("DELETE FROM `order` WHERE id = :id;")
     int deleteOrder(@Bind("id") int id);
 
 }

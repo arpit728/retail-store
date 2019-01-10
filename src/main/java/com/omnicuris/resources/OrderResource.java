@@ -29,6 +29,13 @@ public class OrderResource {
         return orderService.getAllOrders();
     }
 
+    @Path("{id}")
+    @GET
+    @Produces(APPLICATION_JSON)
+    public Order getOrder(@PathParam("id")Integer id){
+        return orderService.getOrder(id);
+    }
+
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
