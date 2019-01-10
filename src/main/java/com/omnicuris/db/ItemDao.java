@@ -9,11 +9,11 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 public interface ItemDao {
 
-    @SqlUpdate("INSERT INTO item (item_name, description, price) VALUES (:i.name, i.description, i.price);")
+    @SqlUpdate("INSERT INTO item (item_name, description, price, quantity) VALUES (:i.name, :i.description, :i.price, :i.quantity);")
     @GetGeneratedKeys
     int addItem(@BindBean("i") Item item);
 
-    @SqlQuery("SELECT * FROM item WHERE id = :id")
+    @SqlQuery("SELECT * FROM item WHERE id = :id;")
     Item getItem(@Bind("id") int id);
 
     @SqlUpdate("UPDATE item " +
@@ -24,11 +24,9 @@ public interface ItemDao {
                "WHERE id = :id;")
     int update(@BindBean("i") Item item, @Bind("id") int id);
 
-    @SqlUpdate("UPDATE item " +
-               "SET quantity = :q)" +
-               "WHERE id = :id;")
+    @SqlUpdate("UPDATE item SET quantity = :q WHERE id = :id;")
     void updateQuantity(@Bind("id") int id, @Bind("q") int quantity);
 
-    @SqlQuery("DELETE FROM item WHERE id = :id;")
-    int delete(@Bind("id") int id);
+    @SqlUpdate("DELETE FROM item WHERE id = :id;")
+    Integer delete(@Bind("id") int id);
 }

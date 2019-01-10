@@ -1,5 +1,6 @@
 package com.omnicuris.envelopes;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import lombok.ToString;
 
 @JsonDeserialize(builder = AddOrderResponse.Builder.class)
 @Builder(builderClassName = "Builder", toBuilder = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @ToString
 @Getter
 public class AddOrderResponse {

@@ -1,20 +1,13 @@
 package com.omnicuris.resources;
 
 import com.omnicuris.core.OrderService;
-import com.omnicuris.envelopes.AddItemResponse;
 import com.omnicuris.envelopes.AddOrderResponse;
-import com.omnicuris.envelopes.Item;
 import com.omnicuris.envelopes.Order;
-import io.dropwizard.validation.MinSize;
-import jdk.nashorn.internal.objects.annotations.Getter;
 
-import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
-
 import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -39,14 +32,15 @@ public class OrderResource {
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public AddOrderResponse createOrder(@NotNull @Valid Order order) {
+    public AddOrderResponse createOrder(Order order) {
         return orderService.processOrder(order);
     }
 
+    @Path("bulk")
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public List<AddOrderResponse> createOrder(@NotNull @Size(min = 1) List<Order> orders) {
+    public List<AddOrderResponse> createBulkOrder(@NotNull @Size(min = 1) List<Order> orders) {
         return orderService.processOrder(orders);
     }
 }

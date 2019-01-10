@@ -18,5 +18,5 @@ database:
 logging:
   level: INFO
   loggers:
-    com.omnicuris: DEBUG
+    com.omnicuris: INFO
 

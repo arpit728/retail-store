@@ -85,11 +85,16 @@ public class OrderService {
         String message = null;
         if (item == null) {
             message = "Requested item doesn't exist, provide a valid item id.";
-        } else if (item.getQuantity() > order.getQuantity()) {
+        } else if (item.getQuantity() < order.getQuantity()) {
             message = "Item out of stock";
         }
         if (message != null) {
-            throw new WebApplicationException(message, Response.ok().build());
+            throw new WebApplicationException(
+                    message,
+                    Response.ok()
+                            .entity(AddOrderResponse.builder().status(FAIL).message(message).build())
+                            .build()
+            );
         }
     }
 

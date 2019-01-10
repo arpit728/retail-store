@@ -1,9 +1,12 @@
 package com.omnicuris;
 
+import com.omnicuris.injection.RetailStoreModule;
 import com.omnicuris.resources.ItemResource;
 import com.omnicuris.resources.OrderResource;
 import io.dropwizard.Application;
+import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.jdbi3.JdbiFactory;
+import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.jdbi.v3.core.Jdbi;
@@ -21,6 +24,12 @@ public class RetailStoreApplication extends Application<RetailStoreConfiguration
 
     @Override
     public void initialize(final Bootstrap<RetailStoreConfiguration> bootstrap) {
+        bootstrap.addBundle(new MigrationsBundle<RetailStoreConfiguration>() {
+            @Override
+            public PooledDataSourceFactory getDataSourceFactory(RetailStoreConfiguration configuration) {
+                return configuration.getDatabase();
+            }
+        });
         // TODO: application initialization
     }
 

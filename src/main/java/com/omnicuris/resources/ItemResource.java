@@ -44,7 +44,6 @@ public class ItemResource {
 
     @Path("/{id}")
     @GET
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Item getItem(@NotNull @PathParam("id") Integer id) {
         return itemService.getItem(id);
@@ -52,7 +51,6 @@ public class ItemResource {
 
     @Path("/{id}")
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteItem(@NotNull @PathParam("id") Integer id) {
         DeleteItemResponse deleteItemResponse = itemService.deleteItem(id);
