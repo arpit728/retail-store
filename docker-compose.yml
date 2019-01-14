@@ -1,0 +1,16 @@
+version: '3'
+services:
+  retail:
+    container_name: retail-store
+    image: arpit728/retail-store:1.1
+    ports:
+      - "4000:8080"
+    depends_on:
+      - retail-store-mysql
+  retail-store-mysql:
+    image: mysql:5.7
+    container_name: retail-store-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: retail_store
